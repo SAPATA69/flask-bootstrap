@@ -11,38 +11,38 @@
             <a class="navbar-brand" href="{{ url_for('index') }}">🚗 ระบบจัดการรถยนต์</a>
             <div class="navbar-nav">
                 <a class="nav-link" href="{{ url_for('show_cars') }}">รายการรถ</a>
-                <a class="nav-link active" href="{{ url_for('new_car') }}">เพิ่มรถใหม่</a>
+                <a class="nav-link" href="{{ url_for('new_car') }}">เพิ่มรถใหม่</a>
             </div>
         </div>
     </nav>
 
     <div class="container mt-5">
-        <h1>เพิ่มรถยนต์ใหม่</h1>
+        <h1>แก้ไขข้อมูลรถยนต์</h1>
         
         <div class="card mt-4">
             <div class="card-body">
                 <form method="POST">
                     <div class="mb-3">
                         <label for="brand" class="form-label">ยี่ห้อ</label>
-                        <input type="text" class="form-control" id="brand" name="brand" required>
+                        <input type="text" class="form-control" id="brand" name="brand" value="{{ car.brand }}" required>
                     </div>
                     
                     <div class="mb-3">
                         <label for="model" class="form-label">รุ่น</label>
-                        <input type="text" class="form-control" id="model" name="model" required>
+                        <input type="text" class="form-control" id="model" name="model" value="{{ car.model }}" required>
                     </div>
                     
                     <div class="mb-3">
                         <label for="year" class="form-label">ปี</label>
-                        <input type="number" class="form-control" id="year" name="year" min="2000" max="2030" required>
+                        <input type="number" class="form-control" id="year" name="year" value="{{ car.year }}" min="2000" max="2030" required>
                     </div>
                     
                     <div class="mb-3">
                         <label for="price" class="form-label">ราคา (บาท)</label>
-                        <input type="number" class="form-control" id="price" name="price" min="0" required>
+                        <input type="number" class="form-control" id="price" name="price" value="{{ car.price }}" min="0" required>
                     </div>
                     
-                    <button type="submit" class="btn btn-success">บันทึก</button>
+                    <button type="submit" class="btn btn-warning">บันทึกการแก้ไข</button>
                     <a href="{{ url_for('show_cars') }}" class="btn btn-secondary">ยกเลิก</a>
                 </form>
             </div>
