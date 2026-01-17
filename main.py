@@ -6,7 +6,11 @@ app.config["SECRET_KEY"] = b'eieieiei;eiwwia'
 cars = [
     {'id': 1, 'brand': 'Toyota', 'model': 'Yaris Ativ', 'year': 2024, 'price': 560000},
     {'id': 2, 'brand': 'Toyota', 'model': 'Yaris Cross', 'year': 2025, 'price': 790000},
-    {'id': 3, 'brand': 'Nissan', 'model': 'Kicks', 'year': 2024, 'price': 850000}
+    {'id': 3, 'brand': 'Nissan', 'model': 'Kicks', 'year': 2024, 'price': 850000},
+    {'id': 4, 'brand': 'Mercedes-Benz', 'model': 'C-Class', 'year': 2025, 'price': 2590000},
+    {'id': 5, 'brand': 'Mercedes-Benz', 'model': 'E-Class', 'year': 2025, 'price': 3490000},
+    {'id': 6, 'brand': 'BMW', 'model': '3 Series', 'year': 2025, 'price': 2590000},
+    {'id': 7, 'brand': 'BMW', 'model': '5 Series', 'year': 2025, 'price': 3790000}
 ]
 
 @app.route('/')
@@ -19,10 +23,10 @@ def show_cars():
     filtered_cars = cars
     
     if request.method == 'POST':
-        search_query = request.form.get('brand', '').strip()  #การค้รหา
+        search_query = request.form.get('brand', '').strip()
         
         if search_query:
-            # เพิ่มการค้นมามาตรงนี้นะจ๋ะ
+            # ค้นหาโดยไม่สนใจตัวพิมพ์เล็ก-ใหญ่
             filtered_cars = [
                 car for car in cars 
                 if search_query.lower() in car['brand'].lower()
