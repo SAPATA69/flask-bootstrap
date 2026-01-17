@@ -13,11 +13,30 @@ cars = [
 def index():
     return render_template('index.html', title='Home Page')
 
-@app.route('/cars')
+@app.route('/cars', methods=['GET', 'POST'])
 def show_cars():
+    search_query = ''
+    filtered_cars = cars
+    
+    if request.method == 'POST':
+        search_query = request.form.get('brand', '').strip()  #การค้รหา
+        
+        if search_query:
+            # เพิ่มการค้นมามาตรงนี้นะจ๋ะ
+            filtered_cars = [
+                car for car in cars 
+                if search_query.lower() in car['brand'].lower()
+            ]
+            
+            if not filtered_cars:
+                flash(f'ไม่พบรถยี่ห้อ "{search_query}"', 'warning')
+            else:
+                flash(f'พบรถยี่ห้อ "{search_query}" จำนวน {len(filtered_cars)} คัน', 'info')
+    
     return render_template('cars/cars.html',
                          title='Show All Cars Page',
-                         cars=cars)
+                         cars=filtered_cars,
+                         search_query=search_query)
 
 @app.route('/cars/new', methods=['GET', 'POST'])
 def new_car():
