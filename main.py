@@ -27,7 +27,6 @@ def new_car():
         year = int(request.form['year'])
         price = int(request.form['price'])
 
-        # แก้ไข: ตรวจสอบว่ามีรถในลิสต์หรือไม่
         if len(cars) > 0:
             new_id = cars[-1]['id'] + 1
         else:
@@ -36,7 +35,7 @@ def new_car():
         car = {'id': new_id, 'brand': brand, 'model': model, 'year': year, 'price': price}
 
         cars.append(car)
-        flash('เพิ่มรถใหม่สำเร็จ!', 'success')  # ✅ แก้แล้ว
+        flash('เพิ่มรถใหม่สำเร็จ!', 'success')
         return redirect(url_for('show_cars'))
     
     return render_template('cars/new_car.html',
@@ -45,16 +44,15 @@ def new_car():
 @app.route('/cars/<int:id>/delete')
 def delete_car(id):
     for car in cars:
-        if id == car['id']:  # ✅ แก้แล้ว
+        if id == car['id']:
             cars.remove(car)
-            flash('ลบรถสำเร็จ!', 'success')  # ✅ แก้แล้ว
+            flash('ลบรถสำเร็จ!', 'success')
             break
     
-    return redirect(url_for('show_cars'))  # ✅ แก้แล้ว
+    return redirect(url_for('show_cars'))
 
-@app.route('/cars/<int:id>/edit', methods=['GET', 'POST'])  # ✅ แก้แล้ว
+@app.route('/cars/<int:id>/edit', methods=['GET', 'POST'])
 def edit_car(id):
-    # หารถที่ต้องการแก้ไข
     car = None
     for c in cars:
         if c['id'] == id:
